@@ -1,0 +1,25 @@
+{
+  "name": "becode-button-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basileLeroy/becode-button-bot.git"
+  },
+  "author": "Basile Leroy <basile.leroy.jnm@hotmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/basileLeroy/becode-button-bot/issues"
+  },
+  "homepage": "https://github.com/basileLeroy/becode-button-bot#readme",
+  "dependencies": {
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2"
+  }
+}
