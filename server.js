@@ -1,6 +1,5 @@
 // Require the necessary discord.js classes
-
-const { Client, Intents } = require('discord.js');
+const { Client, Intents, Guild } = require('discord.js');
 const { token } = require('./config.json');
 const { promotions } = require('./promotions');
 const { buildMessage } = require('./generateMessage');
@@ -11,7 +10,6 @@ const client = new Client({
     intents: [Intents.FLAGS.GUILDS],
     allowedMentions: { parse: ['users', 'roles'] }
 });
-
 // Get the messages
 const getMessages = () => {
     // Get the promotions
@@ -25,12 +23,28 @@ const getMessages = () => {
     });
 }
 
+const composeMessage = (guilds) => {
+    guilds.map((guild, key) => {
+        console.log(guild.id);
+    })
+}
+
 getMessages();
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
+
+    const guilds = client.guilds.cache.map(guild => guild);
+    console.log("Start guild info")
+    console.log("------------------------")
+    console.log("------------------------")
+    composeMessage(guilds);
+    console.log("------------------------")
+    console.log("------------------------")
+    console.log("End Guild info")
+
+
     console.log('Ready!');
 });
-
 
 // Login to Discord with your client's token
 client.login(token);
