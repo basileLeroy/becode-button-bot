@@ -10,40 +10,48 @@ const client = new Client({
     intents: [Intents.FLAGS.GUILDS],
     allowedMentions: { parse: ['users', 'roles'] }
 });
-// Get the messages
-const getMessages = () => {
-    // Get the promotions
-    promotions.forEach((promo, index) => {
-        const guild = promo.guild_id;
-        const discordChannel = promo.channel_id;
-        const role = promo.role_id
-
-        const unfilteredMessage = buildMessage(promo.name);
-        console.log(unfilteredMessage);
-    });
-}
-
+// Get the generateMessage
 const composeMessage = (guilds) => {
+    let thisGuild;
+    let discordChannel;
+    let role;
+
     guilds.map((guild, key) => {
-        console.log(guild.id);
+
+        const channels = guild.channels.cache.map(channel => {
+            promotions.forEach((promo, index) => {
+                thisGuild = promo.guild_id;
+                discordChannel = promo.channel_id;
+                role = promo.role_id
+
+                if (discordChannel === channel.id.toString()) {
+                    const unfilteredMessage = buildMessage(role)
+                    console.log(unfilteredMessage)
+                }
+            });
+        })
     })
 }
 
-getMessages();
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
-
+    console.log("READY!")
     const guilds = client.guilds.cache.map(guild => guild);
-    console.log("Start guild info")
     console.log("------------------------")
+    console.log("Start guild info")
     console.log("------------------------")
     composeMessage(guilds);
     console.log("------------------------")
-    console.log("------------------------")
     console.log("End Guild info")
+    console.log("------------------------")
 
+    const bruDateString = new Date().toLocaleString("en-US", {
+        timeZone: "Europe/Brussels"
+    });
+    const bruDate = new Date(bruDateString);
+    const bruHours = bruDate.getHours() + ":" + bruDate.getMinutes();
 
-    console.log('Ready!');
+    console.log(bruHours);
 });
 
 // Login to Discord with your client's token

@@ -1,6 +1,3 @@
-// Some text
-
-
 const buildMessage = role => {
     const pressDaButton = [
         "Time to press your favourite button   👉🔴",
@@ -10,31 +7,31 @@ const buildMessage = role => {
     ];
 
     const morningStart = [
-        `Gooooooood morning ${role} 😎`,
-        `Top of the morning ${role} ☀️`,
-        `Rise and shine ${role} 🤖`,
-        `Wakey, wakey, eggs and bakey ${role} 🍳`
+        `Gooooooood morning <@&${role}> 😎`,
+        `Top of the morning <@&${role}> ☀️`,
+        `Rise and shine <@&${role}> 🤖`,
+        `Wakey, wakey, eggs and bakey <@&${role}> 🍳`
     ];
 
     const morningEnd = [
-        `Congrats on making it through the morning ${role}!`,
-        `Half way done ${role}!`,
-        `${role}, make some space for snacks!`,
-        `Good job ${role}!`
+        `Congrats on making it through the morning <@&${role}>!`,
+        `Half way done <@&${role}>!`,
+        `<@&${role}>, make some space for snacks!`,
+        `Good job <@&${role}>!`
     ];
 
     const afternoonStart = [
-        `Good afternoon ${role} 🕶️`,
-        `Pleasant afternoon we’re having, ${role} ☺️`,
-        `How u doin' ${role} 🤓`,
-        `Let's get started again ${role} 🚀`
+        `Good afternoon <@&${role}> 🕶️`,
+        `Pleasant afternoon we’re having, <@&${role}> ☺️`,
+        `How u doin' <@&${role}> 🤓`,
+        `Let's get started again <@&${role}> 🚀`
     ];
 
     const afternoonEnd = [
-        `Well done today ${role}!`,
-        `You made it through ${role}!`,
-        `${role}, it's over, pat yourself!`,
-        `Amazing job you did ${role}!`
+        `Well done today <@&${role}>!`,
+        `You made it through <@&${role}>!`,
+        `<@&${role}>, it's over, pat yourself!`,
+        `Amazing job you did <@&${role}>!`
     ];
 
     const randomFrom = messages => {
@@ -61,3 +58,5 @@ const buildMessage = role => {
 
     return message + " " + randomFrom(pressDaButton);
 };
+
+module.exports = {buildMessage};

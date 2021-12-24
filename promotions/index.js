@@ -2,7 +2,7 @@ module.exports = {
     promotions: [
         {
             'name': 'Verou 3',
-            'guild_id': '707489155835232276',
+            'guild_id': '',
             'channel_id': '917369957912817704',
             'role_id': '917370549418737725',
             'start': (new Date("2021-12-14")),
@@ -15,6 +15,24 @@ module.exports = {
                 {
                     'start': (new Date("2022-05-09")),
                     'end': (new Date("2022-05-13").setUTCHours(23, 59, 59))
+                }
+            ]
+        },
+        {
+            'name': 'Test 2',
+            'guild_id': '',
+            'channel_id': '923929154318135337',
+            'role_id': '923944741077409802',
+            'start': (new Date("2021-05-17")),
+            'end': (new Date("2021-12-03").setUTCHours(23, 59, 59)),
+            'holidays': [
+                {
+                    'start': (new Date("2021-07-19")),
+                    'end': (new Date("2021-07-23").setUTCHours(23, 59, 59))
+                },
+                {
+                    'start': (new Date("2021-09-27")),
+                    'end': (new Date("2021-10-01").setUTCHours(23, 59, 59))
                 }
             ]
         },
