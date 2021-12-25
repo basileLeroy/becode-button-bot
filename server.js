@@ -1,5 +1,6 @@
 // Require the necessary discord.js classes
 const { Client, Intents, Guild } = require('discord.js');
+const cron = require('node-cron');
 const { token } = require('./config.json');
 const { promotions } = require('./promotions');
 const { buildMessage } = require('./generateMessage');
@@ -15,18 +16,37 @@ const composeMessage = (guilds) => {
     let thisGuild;
     let discordChannel;
     let role;
+    let holidays;
+    let start;
+    let end;
 
     guilds.map((guild, key) => {
-
-        const channels = guild.channels.cache.map(channel => {
+        // All channels on all Discord servers
+        guild.channels.cache.map(channel => {
+            // All promotions
             promotions.forEach((promo, index) => {
                 thisGuild = promo.guild_id;
                 discordChannel = promo.channel_id;
-                role = promo.role_id
+                role = promo.role_id;
+                holidays = promo.holidays;
+                start = promo.start;
+                end = promo.end;
 
+                // All relevant promotions
                 if (discordChannel === channel.id.toString()) {
-                    const unfilteredMessage = buildMessage(role)
-                    console.log(unfilteredMessage)
+                    const notAHoliday = [];
+                    const currentDate = new Date();
+
+                    holidays.forEach(holiday => {
+                        if(currentDate >= holiday.start && currentDate.setUTCHours(23, 59, 59) <= holiday.end) {
+                            notAHoliday.push(false);
+                        }
+                    });
+
+                    if(notAHoliday.length === 0 && (currentDate >= promo.start && currentDate.setUTCHours(23, 59, 59) <= promo.end)) {
+                        const unfilteredMessage = buildMessage(role);
+                        channel.send(unfilteredMessage);
+                    }
                 }
             });
         })
@@ -37,21 +57,37 @@ const composeMessage = (guilds) => {
 client.once('ready', () => {
     console.log("READY!")
     const guilds = client.guilds.cache.map(guild => guild);
+
+    cron.schedule("0 55 9 * * Mon,Tue,Wed,Thu,Fri,Sat", () => {
+        composeMessage(guilds);
+    })
+    cron.schedule("0 31 12 * * Mon,Tue,Wed,Thu,Fri,Sat", () => {
+        console.log('test')
+        composeMessage(guilds);
+    })
+    cron.schedule("0 25 13 * * Mon,Tue,Wed,Thu,Fri,Sat", () => {
+        composeMessage(guilds);
+    })
+    cron.schedule("0 1 17 * * Mon,Tue,Wed,Thu,Fri,Sat", () => {
+        composeMessage(guilds);
+    })
+
+
     console.log("------------------------")
     console.log("Start guild info")
     console.log("------------------------")
-    composeMessage(guilds);
+    console.log("No input")
     console.log("------------------------")
     console.log("End Guild info")
     console.log("------------------------")
 
-    const bruDateString = new Date().toLocaleString("en-US", {
+    const date = new Date().toLocaleString("en-US", {
         timeZone: "Europe/Brussels"
     });
-    const bruDate = new Date(bruDateString);
-    const bruHours = bruDate.getHours() + ":" + bruDate.getMinutes();
+    const localDate = new Date(date);
+    const localTime = localDate.getHours() + ":" + localDate.getMinutes();
 
-    console.log(bruHours);
+    console.log(localTime);
 });
 
 // Login to Discord with your client's token

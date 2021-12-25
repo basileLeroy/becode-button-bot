@@ -19,16 +19,16 @@ module.exports = {
             ]
         },
         {
-            'name': 'Test 2',
+            'name': 'Tetris server',
             'guild_id': '',
             'channel_id': '923929154318135337',
             'role_id': '923944741077409802',
-            'start': (new Date("2021-05-17")),
-            'end': (new Date("2021-12-03").setUTCHours(23, 59, 59)),
+            'start': (new Date("2021-12-01")),
+            'end': (new Date("2022-06-30").setUTCHours(23, 59, 59)),
             'holidays': [
                 {
-                    'start': (new Date("2021-07-19")),
-                    'end': (new Date("2021-07-23").setUTCHours(23, 59, 59))
+                    'start': (new Date("2021-12-19")),
+                    'end': (new Date("2021-12-30").setUTCHours(23, 59, 59))
                 },
                 {
                     'start': (new Date("2021-09-27")),
@@ -37,7 +37,7 @@ module.exports = {
             ]
         },
         {
-            'name': 'Test',
+            'name': 'My Testing Area',
             'guild_id': '',
             'channel_id': '923907289755312159',
             'role_id': '923906963866284112',
